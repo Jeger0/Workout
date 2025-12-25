@@ -4,6 +4,8 @@ import com.example.workout.model.Workout;
 import com.example.workout.repository.WorkoutRepository;
 import org.springframework.stereotype.Service;
 
+import com.example.workout.exception.ResourceNotFoundException;
+
 import java.util.List;
 
 @Service
@@ -26,7 +28,7 @@ public class WorkoutService {
 
     public Workout getWorkoutById(Long id) {
         return workoutRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Workout not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Workout not found with id: " + id));
     }
 
     public void deleteWorkout(Long id) {

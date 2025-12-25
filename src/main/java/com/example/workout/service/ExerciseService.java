@@ -1,5 +1,6 @@
 package com.example.workout.service;
 
+import com.example.workout.exception.ResourceNotFoundException;
 import com.example.workout.model.Exercise;
 import com.example.workout.model.Workout;
 
@@ -19,7 +20,7 @@ public class ExerciseService {
         this.workoutRepository = workoutRepository;
     }
     public Exercise addExerciseToWorkout(long workoutId, String name, int sets, int reps) {
-        Workout workout = workoutRepository.findById(workoutId).orElseThrow(() -> new RuntimeException("Workout not found"));
+        Workout workout = workoutRepository.findById(workoutId).orElseThrow(() -> new ResourceNotFoundException("Workout not found with id: " + workoutId));
 
         Exercise exercise = new Exercise(name, sets, reps, workout);
 
