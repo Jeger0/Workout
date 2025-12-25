@@ -2,7 +2,6 @@ package com.example.workout.controller;
 
 import com.example.workout.dto.ExerciseResponse;
 import com.example.workout.dto.UpdateExerciseRequest;
-import com.example.workout.model.Exercise;
 import com.example.workout.service.ExerciseService;
 import org.springframework.web.bind.annotation.*;
 
