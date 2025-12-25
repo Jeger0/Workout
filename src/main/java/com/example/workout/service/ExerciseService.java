@@ -7,6 +7,8 @@ import com.example.workout.repository.ExerciseRepository;
 import com.example.workout.repository.WorkoutRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ExerciseService {
     private ExerciseRepository exerciseRepository;
@@ -22,5 +24,9 @@ public class ExerciseService {
         Exercise exercise = new Exercise(name, sets, reps, workout);
 
         return exerciseRepository.save(exercise);
+    }
+
+    public List<Exercise> getExercisesForWorkout(Long workoutId) {
+        return exerciseRepository.findByWorkoutId(workoutId);
     }
 }

@@ -51,4 +51,8 @@ public class WorkoutController {
     public Exercise addExercise(@PathVariable long id, @RequestBody CreateExerciseRequest request) {
         return exerciseService.addExerciseToWorkout(id, request.name(), request.sets(), request.reps());
     }
+    @GetMapping("/{id}/exercises")
+    public List<Exercise> getExercisesForWorkout(@PathVariable Long id) {
+        return exerciseService.getExercisesForWorkout(id);
+    }
 }
