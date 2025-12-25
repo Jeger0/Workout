@@ -30,4 +30,17 @@ public class ExerciseService {
     public List<Exercise> getExercisesForWorkout(Long workoutId) {
         return exerciseRepository.findByWorkoutId(workoutId);
     }
+
+    public Exercise updateExercise(Long id, boolean completed) {
+
+        Exercise exercise = exerciseRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Exercise not found with id " + id)
+                );
+
+        exercise.setCompleted(completed);
+
+        return exerciseRepository.save(exercise);
+    }
+
 }

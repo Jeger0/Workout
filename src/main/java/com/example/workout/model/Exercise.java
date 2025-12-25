@@ -54,4 +54,8 @@ public class Exercise {
     public Workout getWorkout() {
         return workout;
     }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
+    }
 }
