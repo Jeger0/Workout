@@ -5,6 +5,7 @@ import com.example.workout.dto.CreateWorkoutRequest;
 import com.example.workout.model.Exercise;
 import com.example.workout.model.Workout;
 import com.example.workout.service.WorkoutService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class WorkoutController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-        public Workout createWorkout(@RequestBody CreateWorkoutRequest request) {
+        public Workout createWorkout(@Valid @RequestBody CreateWorkoutRequest request) {
         return workoutService.createWorkout(request.name());
     }
 
@@ -48,7 +49,7 @@ public class WorkoutController {
 
     @PostMapping("/{id}/exercises")
     @ResponseStatus(HttpStatus.CREATED)
-    public Exercise addExercise(@PathVariable long id, @RequestBody CreateExerciseRequest request) {
+    public Exercise addExercise(@Valid @PathVariable long id, @RequestBody CreateExerciseRequest request) {
         return exerciseService.addExerciseToWorkout(id, request.name(), request.sets(), request.reps());
     }
     @GetMapping("/{id}/exercises")
