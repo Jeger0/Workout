@@ -1,5 +1,6 @@
 package com.example.workout.service;
 
+import com.example.workout.dto.ExerciseResponse;
 import com.example.workout.exception.ResourceNotFoundException;
 import com.example.workout.model.Exercise;
 import com.example.workout.model.Workout;
@@ -31,7 +32,7 @@ public class ExerciseService {
         return exerciseRepository.findByWorkoutId(workoutId);
     }
 
-    public Exercise updateExercise(Long id, boolean completed) {
+    public ExerciseResponse updateExercise(Long id, boolean completed) {
 
         Exercise exercise = exerciseRepository.findById(id)
                 .orElseThrow(() ->
@@ -40,7 +41,16 @@ public class ExerciseService {
 
         exercise.setCompleted(completed);
 
-        return exerciseRepository.save(exercise);
+        Exercise saved = exerciseRepository.save(exercise);
+
+        return new ExerciseResponse(
+                saved.getId(),
+                saved.getName(),
+                saved.getSets(),
+                saved.getReps(),
+                saved.isCompleted()
+        );
     }
+
 
 }

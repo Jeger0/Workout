@@ -1,5 +1,6 @@
 package com.example.workout.controller;
 
+import com.example.workout.dto.ExerciseResponse;
 import com.example.workout.dto.UpdateExerciseRequest;
 import com.example.workout.model.Exercise;
 import com.example.workout.service.ExerciseService;
@@ -16,7 +17,7 @@ public class ExerciseController {
     }
 
     @PutMapping("/{id}")
-    public Exercise updateExercise(
+    public ExerciseResponse updateExercise(
             @PathVariable Long id,
             @RequestBody UpdateExerciseRequest request
     ) {
