@@ -39,4 +39,8 @@ public class Workout {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+    public List<Exercise> getExercises() {
+        return exercises;
+    }
 }

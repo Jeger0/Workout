@@ -1,5 +1,7 @@
 package com.example.workout.service;
 
+import com.example.workout.dto.ExerciseResponse;
+import com.example.workout.dto.WorkoutResponse;
 import com.example.workout.model.Workout;
 import com.example.workout.repository.WorkoutRepository;
 import org.springframework.stereotype.Service;
@@ -26,9 +28,27 @@ public class WorkoutService {
         return workoutRepository.findAll();
     }
 
-    public Workout getWorkoutById(Long id) {
-        return workoutRepository.findById(id)
+    public WorkoutResponse getWorkoutById(Long id) {
+
+        Workout workout = workoutRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Workout not found with id: " + id));
+
+        List<ExerciseResponse> exercises = workout.getExercises().stream()
+                .map(e -> new ExerciseResponse(
+                        e.getId(),
+                        e.getName(),
+                        e.getSets(),
+                        e.getReps(),
+                        e.isCompleted()
+                ))
+                .toList();
+
+        return new WorkoutResponse(
+                workout.getId(),
+                workout.getName(),
+                workout.getCreatedAt(),
+                exercises
+        );
     }
 
     public void deleteWorkout(Long id) {

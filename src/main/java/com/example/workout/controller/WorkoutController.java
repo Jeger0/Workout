@@ -2,6 +2,7 @@ package com.example.workout.controller;
 
 import com.example.workout.dto.CreateExerciseRequest;
 import com.example.workout.dto.CreateWorkoutRequest;
+import com.example.workout.dto.WorkoutResponse;
 import com.example.workout.model.Exercise;
 import com.example.workout.model.Workout;
 import com.example.workout.service.WorkoutService;
@@ -31,7 +32,7 @@ public class WorkoutController {
     }
 
     @GetMapping("/{id}")
-    public Workout getWorkoutById(@PathVariable Long id) {
+    public WorkoutResponse getWorkoutById(@PathVariable Long id) {
         return workoutService.getWorkoutById(id);
     }
 
